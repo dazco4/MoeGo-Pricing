@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<!-- saved from url=(0055)file:///Users/kevdazkevich/Downloads/moego-pricing.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MoeGo Pricing Reference — Internal</title>
+<link rel="preconnect" href="https://fonts.googleapis.com/">
+<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+<link href="./index_files/css2" rel="stylesheet">
+<style>
+  :root {
+    --moego-orange: #FF6B1A;
+    --moego-orange-soft: #FFF1E8;
+    --ink: #1A1A1A;
+    --ink-2: #404040;
+    --ink-3: #6B6B6B;
+    --ink-4: #9A9A9A;
+    --paper: #FFFFFF;
+    --bg: #F7F7F5;
+    --line: #E5E5E2;
+    --line-2: #EFEFEC;
+    --row-alt: #FAFAF8;
+    --green: #0F7A3E;
+    --red: #9A2A2A;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Inter', sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    -webkit-font-smoothing: antialiased;
+    font-size: 14px;
+    line-height: 1.5;
+    padding: 32px 28px 60px;
+  }
+
+  .wrapper {
+    max-width: 1280px;
+    margin: 0 auto;
+    background: var(--paper);
+    border: 1px solid var(--line);
+  }
+
+  .doc-header {
+    padding: 24px 32px;
+    border-bottom: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    background: var(--paper);
+  }
+
+  .doc-title-group { display: flex; align-items: baseline; gap: 12px; }
+  .doc-title { font-size: 16px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+  .doc-subtitle { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-4); letter-spacing: 0.02em; }
+  .doc-meta { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--ink-4); display: flex; gap: 16px; align-items: center; }
+  .doc-meta .tag { background: var(--moego-orange-soft); color: var(--moego-orange); padding: 3px 8px; font-weight: 600; letter-spacing: 0.04em; }
+
+  .section { padding: 28px 32px; border-bottom: 1px solid var(--line); }
+  .section:last-child { border-bottom: none; }
+  .section-head { display: flex; align-items: baseline; gap: 12px; margin-bottom: 4px; }
+  .section-num { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--moego-orange); font-weight: 600; }
+  .section-title { font-size: 18px; font-weight: 600; letter-spacing: -0.015em; color: var(--ink); }
+  .section-desc { font-size: 13px; color: var(--ink-3); margin-bottom: 20px; max-width: 800px; }
+
+  .toggle-row { display: flex; gap: 0; border: 1px solid var(--line); margin-bottom: 16px; width: fit-content; }
+  .toggle-btn { background: var(--paper); border: none; border-right: 1px solid var(--line); padding: 8px 16px; font-family: 'Inter', sans-serif; font-size: 13px; font-weight: 500; color: var(--ink-2); cursor: pointer; transition: all 0.15s ease; }
+  .toggle-btn:last-child { border-right: none; }
+  .toggle-btn:hover { background: var(--bg); }
+  .toggle-btn.active { background: var(--ink); color: var(--paper); }
+  .toggle-btn .count { font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-4); margin-left: 6px; }
+  .toggle-btn.active .count { color: var(--ink-4); }
+
+  table { width: 100%; border-collapse: collapse; font-size: 13px; }
+  thead th { background: var(--bg); text-align: left; padding: 10px 14px; font-family: 'JetBrains Mono', monospace; font-size: 10px; font-weight: 600; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-3); border-bottom: 1px solid var(--line); border-top: 1px solid var(--line); vertical-align: bottom; white-space: nowrap; }
+  thead th:first-child { border-left: 1px solid var(--line); width: 170px; }
+  thead th:last-child { border-right: 1px solid var(--line); }
+  tbody td { padding: 12px 14px; border-bottom: 1px solid var(--line-2); vertical-align: top; color: var(--ink); }
+  tbody td:first-child { border-left: 1px solid var(--line); font-weight: 500; color: var(--ink-2); background: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: 11px; letter-spacing: 0.02em; }
+  tbody td:last-child { border-right: 1px solid var(--line); }
+  tbody tr:last-child td { border-bottom: 1px solid var(--line); }
+  tbody tr:hover td:not(:first-child) { background: var(--row-alt); }
+
+  .price-cell { font-size: 15px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; }
+  .price-cell .unit { font-size: 11px; color: var(--ink-4); font-weight: 400; margin-left: 2px; }
+  .tier-header { font-size: 13px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; font-family: 'Inter', sans-serif; text-transform: none; }
+  .tier-header .tier-sub { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-4); font-weight: 400; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+  .pill { display: inline-block; font-family: 'JetBrains Mono', monospace; font-size: 10px; padding: 2px 7px; letter-spacing: 0.04em; font-weight: 600; border-radius: 2px; }
+  .pill.yes { background: #E6F4EA; color: var(--green); }
+  .pill.no { background: #FBEAEA; color: var(--red); }
+  .pill.na { background: var(--line-2); color: var(--ink-3); }
+
+  .muted { color: var(--ink-4); }
+  .none-cell { color: var(--ink-4); font-style: italic; font-size: 12px; }
+  .note-cell { font-size: 12px; line-height: 1.45; color: var(--ink-2); }
+  .setup-note { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-4); margin-top: 2px; font-weight: 400; }
+
+  .addon-name { font-size: 13px; font-weight: 600; color: var(--ink); letter-spacing: -0.01em; font-family: 'Inter', sans-serif; text-transform: none; }
+  .addon-name .addon-id { display: block; font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-4); font-weight: 500; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 2px; }
+
+  .positioning-cell { font-size: 12.5px; line-height: 1.5; color: var(--ink-2); max-width: 240px; }
+  .products-cell ul { list-style: none; font-size: 12px; line-height: 1.55; }
+  .products-cell li { padding-left: 12px; position: relative; color: var(--ink-2); }
+  .products-cell li::before { content: "·"; position: absolute; left: 2px; color: var(--moego-orange); font-weight: 700; }
+  .products-cell li .price-inline { color: var(--ink-4); font-family: 'JetBrains Mono', monospace; font-size: 10px; }
+
+  .divider-row td { background: var(--bg) !important; font-family: 'JetBrains Mono', monospace; font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ink-3); font-weight: 600; padding: 8px 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+  .divider-row td:first-child { color: var(--moego-orange); }
+
+  .doc-footer { padding: 16px 32px; background: var(--bg); font-family: 'JetBrains Mono', monospace; font-size: 10px; color: var(--ink-4); display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; letter-spacing: 0.04em; }
+
+  @media (max-width: 900px) {
+    body { padding: 16px 12px; }
+    .section { padding: 20px 16px; }
+    .doc-header { padding: 16px; }
+    table { font-size: 12px; }
+    thead th, tbody td { padding: 8px 10px; }
+    .toggle-row { width: 100%; flex-wrap: wrap; }
+    .toggle-btn { flex: 1; min-width: 50%; }
+  }
+  @media (max-width: 1100px) {
+    .section { overflow-x: auto; }
+    table { min-width: 800px; }
+  }
+</style>
+</head>
+<body>
+<div class="wrapper">
+
+  <div class="doc-header">
+    <div class="doc-title-group">
+      <div class="doc-title">Pricing Reference</div>
+      <div class="doc-subtitle">/ base packages + add-on architecture</div>
+    </div>
+    <div class="doc-meta">
+      <span class="tag">INTERNAL</span>
+      <span>v1 · Apr 2026</span>
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">01</span>
+      <span class="section-title">Base Packages</span>
+    </div>
+    <div class="section-desc">Required. Customer picks one based on business type. Boarding &amp; Daycare has no Basic tier.</div>
+
+    <div class="toggle-row" id="toggle">
+      <button class="toggle-btn active" data-type="mobile">Mobile Grooming <span class="count">3 tiers</span></button>
+      <button class="toggle-btn" data-type="salon">Salon <span class="count">3 tiers</span></button>
+      <button class="toggle-btn" data-type="boarding">Boarding &amp; Daycare <span class="count">2 tiers</span></button>
+    </div>
+
+    <div id="base-table-wrap"><table>
+      <thead>
+        <tr>
+          <th></th>
+          <th><div class="tier-header">Basic<span class="tier-sub">Tier</span></div></th><th><div class="tier-header">Growth<span class="tier-sub">Tier</span></div></th><th><div class="tier-header">Ultimate<span class="tier-sub">Tier</span></div></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Price</td>
+          <td><span class="price-cell">$49<span class="unit">/mo</span></span></td><td><span class="price-cell">$99<span class="unit">/mo</span></span></td><td><span class="price-cell">$159<span class="unit">/mo</span></span></td>
+        </tr>
+        <tr>
+          <td>Deposit</td>
+          <td>3 months</td><td>3 months</td><td>3 months</td>
+        </tr>
+        <tr>
+          <td>Setup Fee</td>
+          <td>$0</td><td>$199<span class="setup-note">AE can waive</span></td><td>$199<span class="setup-note">AE can waive</span></td>
+        </tr>
+        <tr>
+          <td>Changes from Current</td>
+          <td class="note-cell"><span class="none-cell">None</span></td><td class="note-cell">Abandoned Bookings / Leads Management removed</td><td class="note-cell">Elite support: Zoom + full US/CAN support team (not publicly advertised)</td>
+        </tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="section">
+    <div class="section-head">
+      <span class="section-num">02</span>
+      <span class="section-title">Add-On Architecture</span>
+    </div>
+    <div class="section-desc">Optional. Layered on top of any base package. Bundles combine multiple products at bundled pricing; standalones are single-product.</div>
+
+    <div id="addon-table-wrap"><table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Positioning</th>
+          <th>MoeGo Charges</th>
+          <th>Setup Fee</th>
+          <th>Waivable</th>
+          <th>Max Discount</th>
+          <th>Partner Cost</th>
+          <th>Includes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="divider-row">
+          <td>Bundles</td>
+          <td colspan="7">Multi-product packages — discounted vs. standalone</td>
+        </tr>
+        <tr>
+        <td><div class="addon-name">Get Discovered<span class="addon-id">B-01</span></div></td>
+        <td><div class="positioning-cell">Getting demand in the AI era (Ads + AI)</div></td>
+        <td><span class="price-cell" style="font-size:13px;">$99 + 10% agency fee on ad spend</span></td>
+        <td>$0</td>
+        <td><span class="pill na">N/A</span></td>
+        <td>—</td>
+        <td class="muted">$49</td>
+        <td class="products-cell"><ul><li>Ads + Review + Profile <span class="price-inline">$59</span></li><li>AI Search <span class="price-inline">$39</span></li></ul></td>
+      </tr><tr>
+        <td><div class="addon-name">Autonomous Growth<span class="addon-id">B-02</span></div></td>
+        <td><div class="positioning-cell">ALL IN full automation. MoeGo brings you customers — set it and forget it. If below 1x, made right.<br><span class="muted" style="font-size:11px;">$300 / $450 ads monthly. First month $210 credit.</span></div></td>
+        <td><span class="price-cell" style="font-size:13px;">$389 + $3.89 per booking + 10% agency fee on ad spend</span></td>
+        <td>$389</td>
+        <td><span class="pill yes">YES</span></td>
+        <td>30% on base fee</td>
+        <td class="muted">$64 + 18¢/min</td>
+        <td class="products-cell"><ul><li>Ads + Review + Profile</li><li>AI Search</li><li>Growth Site</li><li>Receptionist (Biscuit)</li><li>Leads Management &amp; AI Marketing</li></ul></td>
+      </tr><tr>
+        <td><div class="addon-name">Never Miss a Lead<span class="addon-id">B-03</span></div></td>
+        <td><div class="positioning-cell">Get a website and convert</div></td>
+        <td><span class="price-cell" style="font-size:13px;">$299 + $3.89 per attributed booking</span></td>
+        <td>$389</td>
+        <td><span class="pill no">NO</span></td>
+        <td>30% on base fee</td>
+        <td class="muted">$15 + 18¢/min</td>
+        <td class="products-cell"><ul><li>Growth Site</li><li>Receptionist</li><li>Leads Management &amp; AI Marketing</li></ul></td>
+      </tr>
+        <tr class="divider-row">
+          <td>Standalones</td>
+          <td colspan="7">Single-product — no bundling discount</td>
+        </tr>
+        <tr>
+        <td><div class="addon-name">Growth Site<span class="addon-id">S-01</span></div></td>
+        <td><div class="positioning-cell">Get a website</div></td>
+        <td><span class="price-cell" style="font-size:13px;">$29</span></td>
+        <td>$0</td>
+        <td><span class="pill na">N/A</span></td>
+        <td>0%</td>
+        <td class="muted">$15</td>
+        <td class="products-cell"><ul><li>Growth Site standalone</li></ul></td>
+      </tr><tr>
+        <td><div class="addon-name">AI Receptionist<span class="addon-id">S-02</span></div></td>
+        <td><div class="positioning-cell">Get Biscuit</div></td>
+        <td><span class="price-cell" style="font-size:13px;">$279 + $2.89 per booking</span></td>
+        <td>$389</td>
+        <td><span class="pill no">NO</span></td>
+        <td>30% on base fee</td>
+        <td class="muted">18¢/min</td>
+        <td class="products-cell"><ul><li>AI Receptionist</li></ul></td>
+      </tr><tr>
+        <td><div class="addon-name">Leads Management &amp; AI Agent<span class="addon-id">S-03</span></div></td>
+        <td><div class="positioning-cell">—</div></td>
+        <td><span class="price-cell" style="font-size:13px;">$19 + $2.89 per attributed booking</span></td>
+        <td>$0</td>
+        <td><span class="pill na">N/A</span></td>
+        <td>0%</td>
+        <td class="muted">N/A</td>
+        <td class="products-cell"><ul><li>Leads Management &amp; AI Marketing</li></ul></td>
+      </tr>
+      </tbody>
+    </table></div>
+  </div>
+
+  <div class="doc-footer">
+    <span>MoeGo / Internal Pricing Reference</span>
+    <span>Confidential</span>
+  </div>
+
+</div>
+
+<script>
+  const basePackages = {
+    mobile: [
+      { tier: "Basic", price: 49, deposit: "3 months", setupFee: "$0", setupNote: null, change: null },
+      { tier: "Growth", price: 99, deposit: "3 months", setupFee: "$199", setupNote: "AE can waive", change: "Abandoned Bookings / Leads Management removed" },
+      { tier: "Ultimate", price: 159, deposit: "3 months", setupFee: "$199", setupNote: "AE can waive", change: "Elite support: Zoom + full US/CAN support team (not publicly advertised)" }
+    ],
+    salon: [
+      { tier: "Basic", price: 79, deposit: "3 months", setupFee: "$0", setupNote: null, change: null },
+      { tier: "Growth", price: 149, deposit: "3 months", setupFee: "$199", setupNote: "AE can waive", change: "Abandoned Bookings / Leads Management removed" },
+      { tier: "Ultimate", price: 239, deposit: "3 months", setupFee: "$199", setupNote: "AE can waive", change: "Elite support: Zoom + full US/CAN support team (not publicly advertised)" }
+    ],
+    boarding: [
+      { tier: "Growth", price: 210, deposit: "3 months", setupFee: "$299", setupNote: "AE can waive", change: "Abandoned Bookings / Leads Management removed" },
+      { tier: "Ultimate", price: 315, deposit: "3 months", setupFee: "$299", setupNote: "AE can waive", change: "Elite support: Zoom + full US/CAN support team (not publicly advertised)" }
+    ]
+  };
+
+  const addons = [
+    { category: "bundle", id: "B-01", name: "Get Discovered", positioning: "Getting demand in the AI era (Ads + AI)", setupFee: "$0", waivable: "na", moegoCharges: "$99 + 10% agency fee on ad spend", maxDiscount: "—", partnerCost: "$49", products: [{ name: "Ads + Review + Profile", price: "$59" }, { name: "AI Search", price: "$39" }], notes: null },
+    { category: "bundle", id: "B-02", name: "Autonomous Growth", positioning: "ALL IN full automation. MoeGo brings you customers — set it and forget it. If below 1x, made right.", setupFee: "$389", waivable: "yes", moegoCharges: "$389 + $3.89 per booking + 10% agency fee on ad spend", maxDiscount: "30% on base fee", partnerCost: "$64 + 18¢/min", products: [{ name: "Ads + Review + Profile" }, { name: "AI Search" }, { name: "Growth Site" }, { name: "Receptionist (Biscuit)" }, { name: "Leads Management & AI Marketing" }], notes: "$300 / $450 ads monthly. First month $210 credit." },
+    { category: "bundle", id: "B-03", name: "Never Miss a Lead", positioning: "Get a website and convert", setupFee: "$389", waivable: "no", moegoCharges: "$299 + $3.89 per attributed booking", maxDiscount: "30% on base fee", partnerCost: "$15 + 18¢/min", products: [{ name: "Growth Site" }, { name: "Receptionist" }, { name: "Leads Management & AI Marketing" }], notes: null },
+    { category: "standalone", id: "S-01", name: "Growth Site", positioning: "Get a website", setupFee: "$0", waivable: "na", moegoCharges: "$29", maxDiscount: "0%", partnerCost: "$15", products: [{ name: "Growth Site standalone" }], notes: null },
+    { category: "standalone", id: "S-02", name: "AI Receptionist", positioning: "Get Biscuit", setupFee: "$389", waivable: "no", moegoCharges: "$279 + $2.89 per booking", maxDiscount: "30% on base fee", partnerCost: "18¢/min", products: [{ name: "AI Receptionist" }], notes: null },
+    { category: "standalone", id: "S-03", name: "Leads Management & AI Agent", positioning: "—", setupFee: "$0", waivable: "na", moegoCharges: "$19 + $2.89 per attributed booking", maxDiscount: "0%", partnerCost: "N/A", products: [{ name: "Leads Management & AI Marketing" }], notes: null }
+  ];
+
+  function renderBaseTable(type) {
+    const pkgs = basePackages[type];
+    const wrap = document.getElementById("base-table-wrap");
+
+    const html = `<table>
+      <thead>
+        <tr>
+          <th></th>
+          ${pkgs.map(p => `<th><div class="tier-header">${p.tier}<span class="tier-sub">Tier</span></div></th>`).join("")}
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Price</td>
+          ${pkgs.map(p => `<td><span class="price-cell">$${p.price}<span class="unit">/mo</span></span></td>`).join("")}
+        </tr>
+        <tr>
+          <td>Deposit</td>
+          ${pkgs.map(p => `<td>${p.deposit}</td>`).join("")}
+        </tr>
+        <tr>
+          <td>Setup Fee</td>
+          ${pkgs.map(p => `<td>${p.setupFee}${p.setupNote ? `<span class="setup-note">${p.setupNote}</span>` : ''}</td>`).join("")}
+        </tr>
+        <tr>
+          <td>Changes from Current</td>
+          ${pkgs.map(p => `<td class="note-cell">${p.change ? p.change : '<span class="none-cell">None</span>'}</td>`).join("")}
+        </tr>
+      </tbody>
+    </table>`;
+
+    wrap.innerHTML = html;
+  }
+
+  function renderAddonTable() {
+    const wrap = document.getElementById("addon-table-wrap");
+    const bundles = addons.filter(a => a.category === "bundle");
+    const standalones = addons.filter(a => a.category === "standalone");
+
+    const renderRow = (a) => {
+      const waivableMap = { yes: `<span class="pill yes">YES</span>`, no: `<span class="pill no">NO</span>`, na: `<span class="pill na">N/A</span>` };
+      const productsHtml = a.products.map(p => `<li>${p.name}${p.price ? ` <span class="price-inline">${p.price}</span>` : ''}</li>`).join("");
+      return `<tr>
+        <td><div class="addon-name">${a.name}<span class="addon-id">${a.id}</span></div></td>
+        <td><div class="positioning-cell">${a.positioning}${a.notes ? `<br><span class="muted" style="font-size:11px;">${a.notes}</span>` : ''}</div></td>
+        <td><span class="price-cell" style="font-size:13px;">${a.moegoCharges}</span></td>
+        <td>${a.setupFee}</td>
+        <td>${waivableMap[a.waivable]}</td>
+        <td>${a.maxDiscount}</td>
+        <td class="muted">${a.partnerCost}</td>
+        <td class="products-cell"><ul>${productsHtml}</ul></td>
+      </tr>`;
+    };
+
+    const html = `<table>
+      <thead>
+        <tr>
+          <th>Product</th>
+          <th>Positioning</th>
+          <th>MoeGo Charges</th>
+          <th>Setup Fee</th>
+          <th>Waivable</th>
+          <th>Max Discount</th>
+          <th>Partner Cost</th>
+          <th>Includes</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="divider-row">
+          <td>Bundles</td>
+          <td colspan="7">Multi-product packages — discounted vs. standalone</td>
+        </tr>
+        ${bundles.map(renderRow).join("")}
+        <tr class="divider-row">
+          <td>Standalones</td>
+          <td colspan="7">Single-product — no bundling discount</td>
+        </tr>
+        ${standalones.map(renderRow).join("")}
+      </tbody>
+    </table>`;
+
+    wrap.innerHTML = html;
+  }
+
+  document.getElementById("toggle").addEventListener("click", (e) => {
+    const btn = e.target.closest(".toggle-btn");
+    if (!btn) return;
+    document.querySelectorAll(".toggle-btn").forEach(b => b.classList.remove("active"));
+    btn.classList.add("active");
+    renderBaseTable(btn.dataset.type);
+  });
+
+  renderBaseTable("mobile");
+  renderAddonTable();
+</script>
+
+
+</body></html>
